@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark" class=""><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob: https: http:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: blob: https: http:; media-src 'self' blob: https: http:; connect-src 'self' https: http:;">
+  <title>Maoe</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/novel.css">
+</head>
+<body>
+  <div id="app">
+    <!-- 窄图标侧边栏（Animeko 风格） -->
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-mark">
+          <img src="./icon.png" alt="Maoe" class="logo-img">
+        </div>
+        <span class="logo-label">Maoe</span>
+      </div>
+
+      <nav class="nav">
+        <a class="nav-item active" data-page="home">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M4 10.5V19a1 1 0 0 0 1 1h4v-6h6v6h4a1 1 0 0 0 1-1v-8.5L12 4z"></path>
+          </svg>
+          <span class="nav-label">首页</span>
+        </a>
+        <a class="nav-item" data-page="category">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M3 5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zm10 0a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1zM3 15a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zm10 0a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1z"></path>
+          </svg>
+          <span class="nav-label">分类</span>
+        </a>
+        <a class="nav-item" data-page="search">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M10 3a7 7 0 1 0 4.4 12.5l4.3 4.3 1.4-1.4-4.3-4.3A7 7 0 0 0 10 3zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"></path>
+          </svg>
+          <span class="nav-label">搜索</span>
+        </a>
+        <!-- 小说模式入口（切换为独立轻小说界面） -->
+        <a class="nav-item" data-nswitch="novel" title="小说">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M6 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7l-4-4H6zm1 4h7v2H7zm0 4h10v2H7zm0 4h10v2H7zm0 4h7v2H7z"></path>
+          </svg>
+          <span class="nav-label">小说</span>
+        </a>
+        <!-- 设置入口 -->
+        <a class="nav-item" data-page="settings" title="设置">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"></path>
+            <path fill="currentColor" d="M19.4 13a7.8 7.8 0 0 0 .06-1 7.8 7.8 0 0 0-.06-.99L21.2 9.4a.5.5 0 0 0 .12-.64l-1.7-2.96a.5.5 0 0 0-.6-.22l-2.1.84a7.6 7.6 0 0 0-1.7-1l-.32-2.26a.5.5 0 0 0-.5-.42h-3.4a.5.5 0 0 0-.5.42L8.77 5.42a7.6 7.6 0 0 0-1.71 1l-2.1-.84a.5.5 0 0 0-.6.22L2.67 8.76a.5.5 0 0 0 .12.64l1.62 1.61a7.8 7.8 0 0 0-.06 1c0 .34.02.67.06.99l-1.62 1.61a.5.5 0 0 0-.12.64l1.7 2.96c.13.23.4.32.6.22l2.1-.84c.53.4 1.1.73 1.7.99l.33 2.26c.04.24.25.42.5.42h3.4c.25 0 .46-.18.5-.42l.32-2.26c.62-.26 1.19-.59 1.71-.99l2.1.84c.22.1.47 0 .6-.22l1.7-2.96a.5.5 0 0 0-.12-.64l-1.79-1.6zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"></path>
+          </svg>
+          <span class="nav-label">设置</span>
+        </a>
+        <a class="nav-item" data-page="help" title="帮助">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16z"></path>
+            <path fill="currentColor" d="M12 6.6c-1.7 0-3 .8-3.4 2.2-.1.3 0 .6.3.7l1 .3c.3.1.6-.1.7-.3.2-.6.7-.9 1.4-.9.8 0 1.4.5 1.4 1.2 0 .6-.4 1-.9 1.4-.7.5-1.5 1.1-1.5 2.2v.2c0 .3.2.5.5.5h1c.3 0 .5-.2.5-.5v-.2c0-.6.4-.9 1-1.3.8-.6 1.4-1.3 1.4-2.4 0-1.7-1.4-3.1-3.4-3.1z"></path>
+            <path fill="currentColor" d="M12 15.4a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"></path>
+          </svg>
+          <span class="nav-label">帮助</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="ver-info" id="verInfo">v1.0.0</div>
+      </div>
+    </aside>
+
+    <!-- 主内容区（唯一滚动容器） -->
+    <main class="main" id="main">
+      <!-- 首页 -->
+      <section class="page active" id="page-home">
+        <header class="page-head">
+          <div class="page-title-block">
+            <h1 class="page-title">探索</h1>
+            <span class="page-subtitle">Discover</span>
+          </div>
+          
+        </header>
+
+        <!-- Banner 轮播 -->
+        <div class="banner-wrap" id="bannerWrap">
+          <div class="banner-track" id="bannerTrack"></div>
+          <button class="banner-arrow banner-prev" id="bannerPrev" aria-label="上一张">‹</button>
+          <button class="banner-arrow banner-next" id="bannerNext" aria-label="下一张">›</button>
+          <div class="banner-progress" id="bannerProgress"></div>
+          <button class="banner-play" id="bannerPlay" aria-label="暂停轮播">
+            <svg class="bp-icon bp-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path fill="currentColor" d="M7 5h4v14H7zM13 5h4v14h-4z"></path>
+            </svg>
+            <svg class="bp-icon bp-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path fill="currentColor" d="M8 5v14l11-7z"></path>
+            </svg>
+          </button>
+          <div class="banner-dots" id="bannerDots"></div>
+        </div>
+
+        <!-- 精选推荐 -->
+        <div class="section" id="recSection">
+          <div class="section-head">
+            <h2 class="section-title">全部动漫</h2>
+            <span class="section-sub">All Anime</span>
+          </div>
+          <div class="grid" id="recGrid"></div>
+        </div>
+
+        <!-- 热门周榜 -->
+        <div class="section" id="hotSection" style="display:none">
+          <div class="section-head">
+            <h2 class="section-title">本周热门</h2>
+            <span class="section-more" id="hotMore">查看全部 ›</span>
+          </div>
+          <div class="grid" id="hotGrid"></div>
+        </div>
+      </section>
+
+      <!-- 分类页 -->
+      <section class="page" id="page-category">
+        <header class="page-head">
+          <div class="page-title-block">
+            <h1 class="page-title">分类</h1>
+            <span class="page-subtitle">Category</span>
+          </div>
+        </header>
+        <div class="cat-tabs" id="catTabs"></div>
+        <!-- 真实筛选栏：年份 / 地区 / 排序（macCMS 标准参数） -->
+        <div class="filter-bar" id="filterBar">
+          <div class="filter-group">
+            <span class="filter-label">年份</span>
+            <div class="filter-opts" id="filterYear"></div>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">地区</span>
+            <div class="filter-opts" id="filterArea"></div>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">排序</span>
+            <div class="filter-opts" id="filterSort"></div>
+          </div>
+        </div>
+        <div class="result-count" id="catResultCount">加载中…</div>
+        <div class="grid" id="catGrid"></div>
+        <div class="load-more hidden" id="catLoadMore">
+          <span class="lm-text">加载更多</span>
+          <span class="lm-spinner"></span>
+        </div>
+        <div class="empty-hint hidden" id="catEmpty">该分类暂无内容</div>
+      </section>
+
+      <!-- 搜索页 -->
+      <section class="page" id="page-search">
+        <header class="page-head">
+          <div class="page-title-block">
+            <h1 class="page-title">搜索</h1>
+            <span class="page-subtitle">Search</span>
+          </div>
+        </header>
+
+        <!-- 居中搜索框：聚焦时向两侧拉长 -->
+        <div class="search-hero" id="searchHero">
+          <div class="search-box sq-large" id="searchBox">
+            <svg class="sq-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path fill="currentColor" d="M10 3a7 7 0 1 0 4.4 12.5l4.3 4.3 1.4-1.4-4.3-4.3A7 7 0 0 0 10 3zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"></path>
+            </svg>
+            <input type="text" id="searchInput" placeholder="输入番剧名称 / 别名…" autocomplete="off" maxlength="40">
+            <span class="sq-clear hidden" id="searchClear" title="清空">✕</span>
+            <button class="btn-primary" id="searchBtn">搜索</button>
+          </div>
+          <div class="search-hint">支持模糊匹配，输入片名或关键字即可</div>
+        </div>
+
+        <!-- 搜索历史（仅在未搜索时展示） -->
+        <div class="search-suggest" id="searchSuggest">
+          <div class="sg-block" id="sgHistory">
+            <div class="sg-title">搜索历史</div>
+            <div class="sg-tags" id="sgHistoryTags"></div>
+          </div>
+          <div class="sg-block sg-empty-hist hidden" id="sgNoHistory">
+            <div class="sg-title">搜索历史</div>
+            <div class="sg-empty">暂无搜索记录</div>
+          </div>
+        </div>
+
+        <!-- 搜索结果 -->
+        <div class="result-head hidden" id="searchResultHead">
+          <div class="result-count">为你找到 <b id="searchTotal">0</b> 部相关作品</div>
+          <span class="result-kw" id="searchKwLabel"></span>
+        </div>
+        <div class="grid" id="searchGrid"></div>
+        <div class="search-empty hidden" id="searchEmpty">
+          <div class="se-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="rgba(255,255,255,0.2)" aria-hidden="true"><path d="M10 3a7 7 0 1 0 4.4 12.5l4.3 4.3 1.4-1.4-4.3-4.3A7 7 0 0 0 10 3zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"/></svg></div>
+          <div class="se-title">没有找到相关作品</div>
+          <div class="se-sub">换个关键词试试，或检查名称是否输入完整</div>
+        </div>
+      </section>
+
+      <!-- 详情页 -->
+      <section class="page" id="page-detail">
+        <button class="back-btn" id="detailBack">← 返回</button>
+        <div id="detailContent"></div>
+      </section>
+
+      <!-- 播放页 -->
+      <section class="page" id="page-player">
+        <div class="player-topbar">
+          <button class="back-btn" id="playerBack">← 返回详情</button>
+        </div>
+        <div class="player-wrap">
+          <video id="video" controls="" autoplay="" playsinline=""></video>
+        </div>
+        <!-- 信息条移到视频外，不遮挡画面 -->
+        <div class="player-info-bar" id="playerInfoBar">
+          <div class="pi-left">
+            <div class="pi-title" id="playerTitle"></div>
+            <div class="pi-sub" id="playerSourceInfo"></div>
+          </div>
+          <div class="player-line-switch" id="playerLineSwitch"></div>
+        </div>
+        <div class="player-episodes">
+          <h3 class="ep-block-title">选集</h3>
+          <div class="ep-list" id="epList"></div>
+        </div>
+      </section>
+
+      <!-- 设置页 -->
+      <section class="page" id="page-settings">
+        <header class="page-head">
+          <div class="page-title-block">
+            <h1 class="page-title">设置</h1>
+            <span class="page-subtitle">Preferences</span>
+          </div>
+        </header>
+
+        <!-- 关于 Maoe -->
+        <div class="set-card">
+          <div class="set-card-head">
+            <div class="set-card-title">关于 Maoe</div>
+            <div class="set-card-desc">版本信息与更新检查</div>
+          </div>
+          <div class="set-card-body">
+            <div class="about-app">
+              <div class="about-logo" aria-hidden="true"><img src="assets/maoe-logo.png" alt="Maoe logo"></div>
+              <div class="about-meta">
+                <div class="about-name">Maoe</div>
+                <div class="about-ver" id="aboutVer">v1.4.3</div>
+                <div class="about-desc">二次元追番 PC 客户端</div>
+              </div>
+              <button class="btn-primary" id="aboutCheck">检查更新</button>
+            </div>
+            <div class="about-update" id="aboutUpdate" hidden></div>
+          </div>
+        </div>
+
+        <!-- 数据源 -->
+        <div class="set-card">
+          <div class="set-card-head">
+            <div class="set-card-title">数据源</div>
+            <div class="set-card-desc">选择默认数据源，作为首页 / 分类 / 搜索的数据来源</div>
+          </div>
+          <div class="set-card-body">
+            <div class="src-select" id="setSource">
+    <span class="src-opt active" data-src="lg">
+      <span class="dot"></span>落攻源
+    </span>
+    <span class="src-opt " data-src="yh">
+      <span class="dot"></span>樱花源
+    </span>
+    <span class="src-opt " data-src="bf">
+      <span class="dot"></span>暴风源
+    </span>
+    <span class="src-opt " data-src="hn">
+      <span class="dot"></span>红牛源
+    </span>
+    <span class="src-opt " data-src="gs">
+      <span class="dot"></span>光速源
+    </span>
+    <span class="src-opt " data-src="js">
+      <span class="dot"></span>极速源
+    </span>
+    <span class="src-opt " data-src="ff">
+      <span class="dot"></span>非凡源
+    </span>
+    <span class="src-opt " data-src="md">
+      <span class="dot"></span>Maoe源
+    </span></div>
+          </div>
+        </div>
+
+        <!-- 自定义数据源 -->
+        <div class="set-card">
+          <div class="set-card-head">
+            <div class="set-card-title">自定义数据源</div>
+            <div class="set-card-desc">添加你自己的采集站，支持通用的 macCMS / 苹果CMS(JSON) 接口</div>
+          </div>
+          <div class="set-card-body">
+            <div class="cs-form">
+              <input type="text" id="csName" class="cs-input" placeholder="名称，如：我的源" maxlength="20">
+              <input type="text" id="csBase" class="cs-input cs-input-api" placeholder="API 地址，如：https://example.com/api.php/provide/vod/">
+              <button class="btn-primary cs-add" id="csAdd">添加</button>
+            </div>
+            <div class="cs-list" id="csList"><div class="cs-empty">暂无自定义数据源，添加后即可显示在数据源列表中</div></div>
+            <details class="cs-tutorial">
+              <summary>📖 如何获取并添加数据源？</summary>
+              <ol class="cs-steps">
+                <li>找一个支持 <b>苹果CMS(macCMS) JSON</b> 接口的资源站（采集站 / 影视站大多支持）。</li>
+                <li>在浏览器打开测试：把上面的 API 地址加上 <code>?ac=list</code>，能看到 <code>{"code":1, ...}</code> 说明可用。</li>
+                <li>常见的可播放接口形如：<code>https://域名/api.php/provide/vod/</code> 或 <code>https://域名/api.php/provide/vod/from/xxx/</code>。</li>
+                <li>点击「添加」后即出现在数据源列表中，可设为默认数据源。</li>
+                <li>若添加后无法播放，可能是该站线路为 token 加密型，本应用只能播放直链 m3u8 线路。</li>
+              </ol>
+            </details>
+          </div>
+        </div>
+
+        <!-- 播放体验 -->
+        <div class="set-card">
+          <div class="set-card-head">
+            <div class="set-card-title">播放体验</div>
+            <div class="set-card-desc">调整播放、轮播与界面的交互偏好</div>
+          </div>
+          <div class="set-card-body">
+            <div class="set-row">
+              <div class="set-row-label">自动连播下一集</div>
+              <div class="set-row-desc">本集结束时自动播放下一集</div>
+              <label class="switch">
+                <input type="checkbox" id="setAutoNext">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">轮播自动播放</div>
+              <div class="set-row-desc">首页 Banner 自动轮播切换</div>
+              <label class="switch">
+                <input type="checkbox" id="setBannerAuto">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">播放器自动静音</div>
+              <div class="set-row-desc">部分浏览器限制自动带声播放时开启</div>
+              <label class="switch">
+                <input type="checkbox" id="setMuted">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">默认播放倍速</div>
+              <div class="set-row-desc">打开播放器时默认的播放速度</div>
+              <div class="segmented" id="setRate" role="group" aria-label="默认播放倍速">
+                <span class="seg-opt" data-v="0.75" tabindex="0" role="radio" aria-checked="false">0.75x</span>
+                <span class="seg-opt active" data-v="1" tabindex="0" role="radio" aria-checked="true">1x</span>
+                <span class="seg-opt" data-v="1.25" tabindex="0" role="radio" aria-checked="false">1.25x</span>
+                <span class="seg-opt" data-v="1.5" tabindex="0" role="radio" aria-checked="false">1.5x</span>
+                <span class="seg-opt" data-v="2" tabindex="0" role="radio" aria-checked="false">2x</span>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">默认音量</div>
+              <div class="set-row-desc">播放器初始音量大小</div>
+              <div class="range-wrap">
+                <input type="range" id="setVolume" min="0" max="1" step="0.05" value="1">
+                <span class="range-val" id="setVolumeVal">100%</span>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">记忆播放进度</div>
+              <div class="set-row-desc">关闭后重新打开同一部作品时从头播放</div>
+              <label class="switch">
+                <input type="checkbox" id="setRememberProgress">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">控件自动隐藏</div>
+              <div class="set-row-desc">播放时自动隐藏底部控制栏，移动鼠标再显示</div>
+              <label class="switch">
+                <input type="checkbox" id="setAutoHideControls">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">列表图片懒加载</div>
+              <div class="set-row-desc">减少首屏压力，滚动到可视区域才加载封面</div>
+              <label class="switch">
+                <input type="checkbox" id="setPreloadImages">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 界面外观 -->
+        <div class="set-card">
+          <div class="set-card-head">
+            <div class="set-card-title">界面外观</div>
+            <div class="set-card-desc">液态玻璃光效与显示偏好</div>
+          </div>
+          <div class="set-card-body">
+            <div class="set-row">
+              <div class="set-row-label">玻璃光效分层</div>
+              <div class="set-row-desc">增强背景珠光光晕与玻璃通透度</div>
+              <div class="segmented" id="setGlass" role="group" aria-label="玻璃光效分层">
+                <span class="seg-opt active" data-v="high" tabindex="0" role="radio" aria-checked="true">强</span>
+                <span class="seg-opt" data-v="low" tabindex="0" role="radio" aria-checked="false">弱</span>
+                <span class="seg-opt" data-v="off" tabindex="0" role="radio" aria-checked="false">关闭</span>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">强调色</div>
+              <div class="set-row-desc">选中卡片、按钮与进度条的主色调</div>
+              <div class="swatches" id="setAccent" role="radiogroup" aria-label="强调色">
+                <span class="sw sw-w active" data-c="#ffffff" title="月白" style="--c:#ffffff" tabindex="0" role="radio" aria-checked="true"></span>
+                <span class="sw" data-c="#ff6b9d" title="樱粉" style="--c:#ff6b9d" tabindex="0" role="radio" aria-checked="false"></span>
+                <span class="sw" data-c="#7c5cff" title="紫罗兰" style="--c:#7c5cff" tabindex="0" role="radio" aria-checked="false"></span>
+                <span class="sw" data-c="#38bdf8" title="天蓝" style="--c:#38bdf8" tabindex="0" role="radio" aria-checked="false"></span>
+                <span class="sw" data-c="#34d399" title="薄荷" style="--c:#34d399" tabindex="0" role="radio" aria-checked="false"></span>
+                <span class="sw" data-c="#fbbf24" title="琥珀" style="--c:#fbbf24" tabindex="0" role="radio" aria-checked="false"></span>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">界面缩放</div>
+              <div class="set-row-desc">整体字号与间距密度（100% 为默认）</div>
+              <div class="range-wrap range-wide">
+                <input type="range" id="setScale" min="0.85" max="1.2" step="0.05" value="1">
+                <span class="range-val" id="setScaleVal">100%</span>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">简洁模式</div>
+              <div class="set-row-desc">隐藏副标题与装饰，聚焦内容</div>
+              <label class="switch">
+                <input type="checkbox" id="setMinimal">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 通用 -->
+        <div class="set-card">
+          <div class="set-card-head">
+            <div class="set-card-title">通用</div>
+            <div class="set-card-desc">恢复默认与数据管理</div>
+          </div>
+          <div class="set-card-body">
+            <div class="set-row">
+              <div class="set-row-label">恢复默认设置</div>
+              <div class="set-row-desc">将所有选项还原为初始值</div>
+              <button class="btn-ghost" id="setReset">恢复默认</button>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">清空搜索历史</div>
+              <div class="set-row-desc">删除本地保存的全部搜索记录</div>
+              <button class="btn-ghost btn-danger" id="setClearHist">清空记录</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 帮助页 -->
+      <section class="page" id="page-help">
+        <header class="page-head">
+          <div class="page-title-block">
+            <h1 class="page-title">帮助</h1>
+            <span class="page-subtitle">Help</span>
+          </div>
+          <div class="page-tools">
+            <div class="ver-chip" id="helpVer">v1.4.3</div>
+          </div>
+        </header>
+
+        <!-- 快速上手 -->
+        <div class="set-card">
+          <div class="set-card-head">
+            <div class="set-card-title">快速上手</div>
+            <div class="set-card-desc">三步开始追番</div>
+          </div>
+          <div class="set-card-body">
+            <div class="help-steps">
+              <div class="help-step"><span class="hs-num">1</span><div><b>浏览分类</b><p>左侧「分类」进入，按年份 / 地区 / 类型筛选番剧。</p></div></div>
+              <div class="help-step"><span class="hs-num">2</span><div><b>搜索番剧</b><p>顶部搜索框输入番名 / 别名快速查找。</p></div></div>
+              <div class="help-step"><span class="hs-num">3</span><div><b>在线播放</b><p>详情页点击「立即播放」，可切换线路与选集。</p></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 使用说明 -->
+        <div class="set-card">
+          <div class="set-card-head">
+            <div class="set-card-title">使用说明</div>
+            <div class="set-card-desc">了解数据源、播放与设置</div>
+          </div>
+          <div class="set-card-body">
+            <div class="help-list">
+              <div class="help-item"><div class="hi-title">数据源</div><p>「设置 → 数据源」切换默认数据源；「设置 → 自定义数据源」可添加资源共享站。切换后首页与分类自动刷新。</p></div>
+              <div class="help-item"><div class="hi-title">播放</div><p>部分线路需要手动切换线路（详情页或播放页「切换线路」）。若需自动连播请在设置开启。</p></div>
+              <div class="help-item"><div class="hi-title">外观</div><p>「设置 → 界面外观」调整玻璃光效强弱或开启简洁模式，立即生效并自动保存。</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 常见问题 -->
+        <div class="set-card">
+          <div class="set-card-head">
+            <div class="set-card-title">常见问题</div>
+            <div class="set-card-desc">遇到的常见情况与解决办法</div>
+          </div>
+          <div class="set-card-body">
+            <div class="help-list">
+              <div class="help-item"><div class="hi-title">播放失败 / 画面黑屏</div><p>多为线路失效。请点击「切换线路」到另一条线路，或切换到其它数据源重试。</p></div>
+              <div class="help-item"><div class="hi-title">没有声音</div><p>可能是浏览器自动播放限制。请手动点击播放器内播放键，或在设置关闭「播放器自动静音」。</p></div>
+              <div class="help-item"><div class="hi-title">自定义源添加后无内容</div><p>请确认 API 地址返回的是 JSON（以 <code>{"code":1,...}</code> 开头）。若仍为空可能是该站接口不兼容。</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ==================== 小说模式（独立界面）==================== -->
+  <div id="novelApp" class="hidden">
+    <!-- 小说窄图标侧边栏 -->
+    <aside class="sidebar novel-sidebar">
+      <div class="logo">
+        <div class="logo-mark">
+          <img src="./icon.png" alt="Maoe" class="logo-img">
+        </div>
+        <span class="logo-label">小说</span>
+      </div>
+
+      <nav class="nav novel-nav-top">
+        <a class="nav-item nactive" data-npage="home">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M4 10.5V19a1 1 0 0 0 1 1h4v-6h6v6h4a1 1 0 0 0 1-1v-8.5L12 4z"></path>
+          </svg>
+          <span class="nav-label">首页</span>
+        </a>
+        <a class="nav-item" data-npage="cat">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M3 5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zm10 0a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1zM3 15a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zm10 0a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1z"></path>
+          </svg>
+          <span class="nav-label">分类</span>
+        </a>
+        <a class="nav-item" data-npage="search">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M10 3a7 7 0 1 0 4.4 12.5l4.3 4.3 1.4-1.4-4.3-4.3A7 7 0 0 0 10 3zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"></path>
+          </svg>
+          <span class="nav-label">搜索</span>
+        </a>
+      </nav>
+
+      <!-- 书架（位于设置上方） -->
+      <nav class="nav novel-nav-book">
+        <a class="nav-item" data-npage="shelf">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M4 4h3v16H4zM8.5 4h3v16h-3zM14 4l2.8 15.4a1 1 0 0 0 1.98-.36L15.2 4z"></path>
+          </svg>
+          <span class="nav-label">书架</span>
+        </a>
+        <a class="nav-item" data-npage="settings">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"></path>
+            <path fill="currentColor" d="M19.4 13a7.8 7.8 0 0 0 .06-1 7.8 7.8 0 0 0-.06-.99L21.2 9.4a.5.5 0 0 0 .12-.64l-1.7-2.96a.5.5 0 0 0-.6-.22l-2.1.84a7.6 7.6 0 0 0-1.7-1l-.32-2.26a.5.5 0 0 0-.5-.42h-3.4a.5.5 0 0 0-.5.42L8.77 5.42a7.6 7.6 0 0 0-1.71 1l-2.1-.84a.5.5 0 0 0-.6.22L2.67 8.76a.5.5 0 0 0 .12.64l1.62 1.61a7.8 7.8 0 0 0-.06 1c0 .34.02.67.06.99l-1.62 1.61a.5.5 0 0 0-.12.64l1.7 2.96c.13.23.4.32.6.22l2.1-.84c.53.4 1.1.73 1.7.99l.33 2.26c.04.24.25.42.5.42h3.4c.25 0 .46-.18.5-.42l.32-2.26c.62-.26 1.19-.59 1.71-.99l2.1.84c.22.1.47 0 .6-.22l1.7-2.96a.5.5 0 0 0-.12-.64l-1.79-1.6z"></path>
+          </svg>
+          <span class="nav-label">设置</span>
+        </a>
+      </nav>
+
+      <!-- 左下角：返回动漫 -->
+      <div class="sidebar-footer">
+        <button class="back-anime" id="backToAnime">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20z"></path>
+          </svg>
+          <span class="back-anime-label">返回动漫</span>
+        </button>
+        <div class="ver-info" id="novelVer">v1.4.3</div>
+      </div>
+    </aside>
+
+    <!-- 小说主内容区（唯一滚动容器） -->
+    <main class="main" id="novelMain" style="overscroll-behavior:contain">
+      <!-- 下拉刷新指示器 -->
+      <div class="nptr" id="novelPtr">
+        <div class="nptr-inner">
+          <span class="nptr-arrow" id="nptrArrow">↓</span>
+          <span class="nptr-text" id="nptrText">下拉刷新</span>
+        </div>
+      </div>
+
+      <!-- 首页 -->
+      <section class="npage nactive" id="npage-home">
+        <header class="page-head">
+          <div class="page-title-block">
+            <h1 class="page-title">书屋</h1>
+            <span class="page-subtitle">Light Novel</span>
+          </div>
+        </header>
+        <div class="nlogin hidden" id="novelLoginBanner"></div>
+        <div class="nrank-bar" id="novelRankBar"></div>
+        <div class="grid" id="novelGrid"></div>
+        <div class="load-more hidden" id="novelMore">
+          <span class="lm-text">加载更多</span>
+          <span class="lm-spinner"></span>
+        </div>
+        <div class="empty-hint hidden" id="novelHomeEmpty">该数据源暂无内容</div>
+      </section>
+
+      <!-- 分类 -->
+      <section class="npage" id="npage-cat">
+        <header class="page-head">
+          <div class="page-title-block">
+            <h1 class="page-title">分类</h1>
+            <span class="page-subtitle">Category</span>
+          </div>
+        </header>
+        <div class="novel-cat-tabs" id="novelCatTabs"></div>
+        <div class="result-count" id="novelCatCount">加载中…</div>
+        <div class="grid" id="novelCatGrid"></div>
+        <div class="load-more hidden" id="novelCatMore">
+          <span class="lm-text">加载更多</span>
+          <span class="lm-spinner"></span>
+        </div>
+        <div class="empty-hint hidden" id="novelCatEmpty">该分类暂无内容</div>
+      </section>
+
+      <!-- 搜索 -->
+      <section class="npage" id="npage-search">
+        <header class="page-head">
+          <div class="page-title-block">
+            <h1 class="page-title">搜索</h1>
+            <span class="page-subtitle">Search</span>
+          </div>
+        </header>
+        <div class="search-hero">
+          <div class="search-box sq-large">
+            <svg class="sq-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path fill="currentColor" d="M10 3a7 7 0 1 0 4.4 12.5l4.3 4.3 1.4-1.4-4.3-4.3A7 7 0 0 0 10 3zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"></path>
+            </svg>
+            <input type="text" id="novelSearchInput" placeholder="输入书名 / 作者…" autocomplete="off" maxlength="40">
+            <button class="btn-primary" id="novelSearchBtn">搜索</button>
+          </div>
+        </div>
+        <div class="result-head hidden" id="novelSearchResultHead">
+          <div class="result-count">为你找到 <b id="novelSearchTotal">0</b> 部作品</div>
+        </div>
+        <div class="grid" id="novelSearchGrid"></div>
+        <div class="search-empty hidden" id="novelSearchEmpty">
+          <div class="se-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="rgba(255,255,255,0.2)" aria-hidden="true"><path d="M10 3a7 7 0 1 0 4.4 12.5l4.3 4.3 1.4-1.4-4.3-4.3A7 7 0 0 0 10 3zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"/></svg></div>
+          <div class="se-title">没有找到相关作品</div>
+          <div class="se-sub">换个关键词试试</div>
+        </div>
+        <!-- 搜索历史 -->
+        <div class="search-suggest hidden" id="novelSearchHistory">
+          <div class="sg-block">
+            <div class="sg-title">搜索历史</div>
+            <div class="sg-tags" id="novelSearchHistoryTags"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 详情 -->
+      <section class="npage" id="npage-detail">
+        <button class="back-btn" id="novelDetailBack">← 返回</button>
+        <div id="novelDetailContent"></div>
+      </section>
+
+      <!-- 阅读器 -->
+      <section class="npage" id="npage-reader">
+        <div class="reader-topbar">
+          <button class="back-btn" id="readerBack">← 返回</button>
+          <div class="reader-title" id="readerTitle"></div>
+        </div>
+        <div class="reader-body" id="readerBody">
+          <h1 class="reader-chapter-title" id="readerChapterTitle"></h1>
+          <div class="reader-paras" id="readerParas"></div>
+        </div>
+        <!-- 右侧竖边栏：目录 + 章节导航 + 阅读设置（固定右侧，不随滚动移动） -->
+        <div class="reader-rail" id="readerRail" aria-label="章节导航与设置">
+          <button class="rail-btn" id="readerCatalogBtn" title="目录">
+            <svg class="rail-ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 6h4v4H4zm6 0h10v2H10zm0 4h10v2H10zm0 4h10v2H10zM4 14h4v4H4zm0-4h4v2H4z"/></svg>
+            <span>目录</span>
+          </button>
+          <button class="rail-btn" id="readerPrev" title="上一章（←）">
+            <svg class="rail-ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 5l-7 7 1.4 1.4L11 8.8V19h2V8.8l4.6 4.6L19 12z"/></svg>
+            <span>上一章</span>
+          </button>
+          <button class="rail-prog" id="readerProgressBtn" title="跳转到章节">0 / 0</button>
+          <button class="rail-btn" id="readerNext" title="下一章（→）">
+            <svg class="rail-ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 19l7-7-1.4-1.4L13 15.2V5h-2v10.2l-4.6-4.6L5 12z"/></svg>
+            <span>下一章</span>
+          </button>
+          <button class="rail-btn rail-settings-btn" id="readerSettingBtn" title="阅读设置">
+            <svg class="rail-ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.8 7.8 0 0 0 .06-1 7.8 7.8 0 0 0-.06-.99L21.2 9.4a.5.5 0 0 0 .12-.64l-1.7-2.96a.5.5 0 0 0-.6-.22l-2.1.84a7.6 7.6 0 0 0-1.7-1l-.32-2.26a.5.5 0 0 0-.5-.42h-3.4a.5.5 0 0 0-.5.42L8.77 5.42a7.6 7.6 0 0 0-1.71 1l-2.1-.84a.5.5 0 0 0-.6.22L2.67 8.76a.5.5 0 0 0 .12.64l1.62 1.61a7.8 7.8 0 0 0-.06 1c0 .34.02.67.06.99l-1.62 1.61a.5.5 0 0 0-.12.64l1.7 2.96c.13.23.4.32.6.22l2.1-.84c.53.4 1.1.73 1.7.99l.33 2.26c.04.24.25.42.5.42h3.4c.25 0 .46-.18.5-.42l.32-2.26c.62-.26 1.19-.59 1.71-.99l2.1.84c.22.1.47 0 .6-.22l1.7-2.96a.5.5 0 0 0-.12-.64l-1.79-1.6z"></path></svg>
+            <span>设置</span>
+          </button>
+          <div class="reader-settings hidden" id="readerSettings"></div>
+        </div>
+      </section>
+
+      <!-- 书架 -->
+      <section class="npage" id="npage-shelf">
+        <header class="page-head">
+          <div class="page-title-block">
+            <h1 class="page-title">书架</h1>
+            <span class="page-subtitle">Bookshelf</span>
+          </div>
+        </header>
+        <div class="shelf-tabs" id="shelfTabs"></div>
+        <div class="grid" id="shelfGrid"></div>
+        <div class="empty-hint hidden" id="shelfEmpty">书架还是空的，去逛逛吧</div>
+        <div class="section" id="readingSection" style="display:none">
+          <div class="section-head">
+            <h2 class="section-title">阅读记录</h2>
+            <span class="section-sub">History</span>
+          </div>
+          <div class="grid" id="readingGrid"></div>
+        </div>
+      </section>
+
+      <!-- 设置 -->
+      <section class="npage" id="npage-settings">
+        <header class="page-head">
+          <div class="page-title-block">
+            <h1 class="page-title">设置</h1>
+            <span class="page-subtitle">Preferences</span>
+          </div>
+        </header>
+        <!-- 账号与数据源 -->
+        <div class="set-card">
+          <div class="set-card-head">
+            <div class="set-card-title">账号与数据源</div>
+            <div class="set-card-desc">切换小说数据源；登录 wenku8 开启浏览 / 收藏 / 书签同步</div>
+          </div>
+          <div class="set-card-body">
+            <div class="src-select" id="novelSetSource"></div>
+            <div class="novel-account" id="novelAccount"></div>
+          </div>
+        </div>
+        <!-- 阅读器外观 -->
+        <div class="set-card">
+          <div class="set-card-head">
+            <div class="set-card-title">阅读器</div>
+            <div class="set-card-desc">调整字号、行距、字体与主题</div>
+          </div>
+          <div class="set-card-body">
+            <div class="set-row">
+              <div class="set-row-label">正文字号</div>
+              <div class="range-wrap range-wide">
+                <input type="range" id="nFontSize" min="14" max="30" step="1" value="18">
+                <span class="range-val" id="nFontSizeVal">18px</span>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">行距</div>
+              <div class="segmented" id="nLineHeight">
+                <span class="seg-opt" data-v="1.6">紧凑</span>
+                <span class="seg-opt active" data-v="1.95">舒适</span>
+                <span class="seg-opt" data-v="2.2">宽松</span>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">正文字体</div>
+              <div class="segmented" id="nFontFamily">
+                <span class="seg-opt active" data-v="default">默认</span>
+                <span class="seg-opt" data-v="serif">宋体</span>
+                <span class="seg-opt" data-v="kai">楷体</span>
+                <span class="seg-opt" data-v="hei">黑体</span>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">阅读主题</div>
+              <div class="novel-themes" id="nTheme"></div>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">段落首行缩进</div>
+              <label class="switch"><input type="checkbox" id="nIndent" checked><span class="switch-slider"></span></label>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">记忆阅读进度</div>
+              <div class="set-row-desc">下次打开自动跳转到上次章节</div>
+              <label class="switch"><input type="checkbox" id="nRemember" checked><span class="switch-slider"></span></label>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">阅读亮度</div>
+              <div class="range-wrap range-wide">
+                <input type="range" id="nBrightness" min="60" max="115" step="1" value="100">
+                <span class="range-val" id="nBrightnessVal">100%</span>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">阅读区宽</div>
+              <div class="segmented" id="nReadWidth">
+                <span class="seg-opt" data-v="narrow">窄</span>
+                <span class="seg-opt active" data-v="normal">标准</span>
+                <span class="seg-opt" data-v="wide">宽</span>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">段间距</div>
+              <div class="segmented" id="nParaSpace">
+                <span class="seg-opt" data-v="compact">紧凑</span>
+                <span class="seg-opt active" data-v="normal">标准</span>
+                <span class="seg-opt" data-v="relaxed">宽松</span>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">正文字重</div>
+              <div class="segmented" id="nFontWeight">
+                <span class="seg-opt active" data-v="normal">常规</span>
+                <span class="seg-opt" data-v="medium">中等</span>
+                <span class="seg-opt" data-v="bold">加粗</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 界面 -->
+        <div class="set-card">
+          <div class="set-card-head">
+            <div class="set-card-title">界面</div>
+            <div class="set-card-desc">调整书架网格密度与封面圆角</div>
+          </div>
+          <div class="set-card-body">
+            <div class="set-row">
+              <div class="set-row-label">网格密度</div>
+              <div class="segmented" id="nGridDensity">
+                <span class="seg-opt" data-v="compact">紧凑</span>
+                <span class="seg-opt active" data-v="normal">标准</span>
+                <span class="seg-opt" data-v="relaxed">宽松</span>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">封面圆角</div>
+              <div class="range-wrap range-wide">
+                <input type="range" id="nCoverRadius" min="0" max="20" step="1" value="10">
+                <span class="range-val" id="nCoverRadiusVal">10px</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 数据 -->
+        <div class="set-card">
+          <div class="set-card-head">
+            <div class="set-card-title">数据</div>
+            <div class="set-card-desc">管理本地书架、阅读记录与缓存</div>
+          </div>
+          <div class="set-card-body">
+            <div class="set-row">
+              <div class="set-row-label">清空书架</div>
+              <div class="set-row-desc">移除所有收藏书籍</div>
+              <button class="btn-ghost" id="nClearShelf">清空</button>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">清空阅读记录</div>
+              <div class="set-row-desc">移除全部阅读进度</div>
+              <button class="btn-ghost" id="nClearHistory">清空</button>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">恢复默认设置</div>
+              <div class="set-row-desc">重置阅读与界面选项</div>
+              <button class="btn-ghost" id="nResetSettings">重置</button>
+            </div>
+            <div class="set-row">
+              <div class="set-row-label">清除本地缓存</div>
+              <div class="set-row-desc">删除书架、记录与设置，回到初始状态</div>
+              <button class="btn-ghost" id="nClearCache">清除</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="loading-mask show" id="loadingMask">
+    <div class="loading-spinner"></div>
+    <div class="loading-text" id="loadingText">正在加载首页…</div>
+  </div>
+
+  <script src="../node_modules/hls.js/dist/hls.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/novel_app.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
